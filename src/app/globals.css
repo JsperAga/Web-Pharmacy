@@ -1,26 +1,479 @@
-@import "tailwindcss";
+/* app/globals.css */
+/* Ensure html and body take full height */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+* {
+  box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Set body to flex layout to handle header/body/footer structure */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+   overflow-x: hidden; 
+}
+
+/* Make main content grow to fill space */
+main {
+  flex: 1;
+}
+/* Optional styling enhancements */
+header, footer {
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden; /* Prevents horizontal scroll */
+}
+
+header {
+  background-color: #29a9e0;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 50; /* ensure it's above other content */
+}
+
+header div {
+  margin: 5px;
+}
+/* NAVIGATION STYLES */
+/* Optional: make nav sticky too */
+nav {
+  position: sticky;
+  top: 50px; /* adjust based on header height */
+  z-index: 40;
+  background-color: #e9e9ea;
+  display: flex;
+  justify-content: right;
+  flex-wrap: wrap;
+  padding: 10px 15px;
+  gap: 10px;
+}
+
+nav a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+/* nav a:hover {
+  background-color: #007cb3;
+} */
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 60px 20px;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  background-image: url('/images/bg_1.jpg'); /* Update the path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white; /* makes text readable */
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4); /* dark overlay */
+  z-index: 0;
+}
+
+.hero-text {
+  flex: 1;
+  max-width: 500px;
+  margin-right: 10px;
+  z-index: 1;
+}
+
+.hero-text h1 {
+  font-size: 32px;
+}
+
+.hero img {
+  max-width: 220px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.buttons a {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 10px 15px;
+  text-decoration: none;
+  background: #007bff;
+  color: white;
+  border-radius: 5px;
+}
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #f2f2f2;
+}
+
+/* GRID VIIEW STYLES */
+
+.store-container {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.store-title {
+  font-size: 36px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+
+ 
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  transition: box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+  font-size: 48px;
+  margin-bottom: 15px;
+  /* max-width: 120px; */
+}
+
+
+.buy-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #29a9e0;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.buy-button:hover {
+  background: #1d87b6;
+}
+
+
+/* ABout */
+.about-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 160px); /* adjust if your header/footer have height */
+  
+  background-color: #f5faff;
+}
+
+.about-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+
+  max-width: 1200px;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.about-box h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #29a9e0;
+}
+
+.about-box p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #333;
+}
+
+.about-text {
+  flex: 1 1 60%;
+}
+
+.about-image {
+  flex: 1 1 35%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+/* contact us */
+
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 20px;
+  background-color: #ffffff;
+  min-height: calc(100vh - 160px); /* adjust for header/footer */
+}
+
+.contact-box {
+  max-width: 800px;
+  width: 100%;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-box h1 {
+  font-size: 32px;
+  color: #29a9e0;
+  margin-bottom: 10px;
+}
+
+.contact-box p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.contact-details {
+  margin: 30px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.contact-details h3 {
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 300px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+
+/* NOT FOUND */
+
+.notfound-container {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.notfound-container h1 {
+  font-size: 5rem;
+  margin: 0;
+  color: #29a9e0;
+}
+
+.notfound-container h2 {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+.notfound-container p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.btn-home {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #29a9e0;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-home:hover {
+  background-color: #007cb3;
+}
+
+/* =============================
+   Testimonial Section Styling
+============================= */
+
+.testimonial-section {
+  padding: 80px 20px;
+  background-color: #ffffff;
+}
+
+.testimonial-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.testimonial-icon {
+  background-color: #fee2e2; /* light red */
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.testimonial-header h2 {
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: #222;
+}
+
+.testimonial-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.testimonial-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  padding: 24px;
+  transition: box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-stars {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.testimonial-content {
+  font-style: italic;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+.testimonial-author {
+  font-weight: 600;
+  color: #222;
+}
+
+.testimonial-location {
+  font-size: 0.875rem;
+  color: #777;
+}
+
+/* Testimonial */
+
+
+.contact-form {
+  margin-top: 30px;
+  display: grid;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #29a9e0;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(41, 169, 224, 0.2);
+}
+
+.submit-button {
+  background-color: #29a9e0;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #1d87b6;
+}
+
+/* site footer */
+
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #f2f2f2;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icons a {
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #29a9e0;
 }
